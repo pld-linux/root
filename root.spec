@@ -35,8 +35,3 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(600,root,root,700)
 %config(noreplace) %verify(not mtime size md5) /root
-
-%changelog
-* Thu Jul 23 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [1.5-4d]
-- build for PLD
