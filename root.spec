@@ -9,7 +9,7 @@ Group(pl):	Podstawowe
 Source:		%{name}.tar.bz2
 Patch0:		%{name}-env.patch
 Obsoletes:	rootfiles
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Buildarch:	noarch
 
 %description
