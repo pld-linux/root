@@ -1,0 +1,9 @@
+- changed all BuildRoot definitons
+- removed all applnkdir defs
+- changed some prereqs/requires
+- removed duplicate empty lines
+
+
+* Thu Jul 23 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [1.5-4d]
+- build for PLD
