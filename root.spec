@@ -6,7 +6,8 @@ Release:	2
 Copyright:	public domain
 Group:		Base
 Group(pl):	Podstawowe
-Source:		root.tar.bz2
+Source:		%{name}.tar.bz2
+Patch0:		%{name}-env.patch
 Obsoletes:	rootfiles
 BuildRoot:	/tmp/%{name}-%{version}-root
 Buildarch:	noarch
@@ -20,6 +21,7 @@ super u¿ytkownika (root-a).
 
 %prep
 %setup -q -n %{name}
+%patch -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -37,4 +39,4 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Thu Jul 23 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
   [1.5-4d]
-- build for PLD Tornado
+- build for PLD
