@@ -1,21 +1,27 @@
+# $Reviision: 1.59 $, $Date: 2006-03-28 11:42:08 $
 #
 Summary:	An object-oriented data analysis environment
+Summary(pl);	Obiektowo zorientowane ¶rodowiksko do analizowania danych
 Name:		root
 Version:	5.10.00
 Release:	0.1
 License:	LGPL
 Group:		Applications
-Source0:	ftp://root.cern.ch/%{name}/%{name}_v%{version}.source.tar.gz
+Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 # Source0-md5:	158009f95202abaa06ab008add29f86b
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+An object-oriented data analysis environment.
+
+%description -l pl
+Obiektowo zorientowane ¶rodowiksko do analizowania danych.
 
 %prep
-%setup -q -n root
+%setup -q -n %{name}
 
 %build
-./configure linux --prefix=/usr
+./configure linux --prefix=%{_prefix}
 %{__make}
 
 %install
