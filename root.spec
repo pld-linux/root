@@ -1,7 +1,5 @@
-# $Reviision: 1.59 $, $Date: 2006-03-28 11:42:08 $
-#
 Summary:	An object-oriented data analysis environment
-Summary(pl);	Obiektowo zorientowane ¶rodowiksko do analizowania danych
+Summary(pl);	Obiektowo zorientowane ¶rodowisko do analizowania danych
 Name:		root
 Version:	5.10.00
 Release:	0.1
@@ -15,7 +13,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 An object-oriented data analysis environment.
 
 %description -l pl
-Obiektowo zorientowane ¶rodowiksko do analizowania danych.
+Obiektowo zorientowane ¶rodowisko do analizowania danych.
 
 %prep
 %setup -q -n %{name}
@@ -26,9 +24,6 @@ Obiektowo zorientowane ¶rodowiksko do analizowania danych.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-# create directories if necessary
-#install -d $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
