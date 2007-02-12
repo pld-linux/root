@@ -1,5 +1,5 @@
 Summary:	An object-oriented data analysis environment
-Summary(pl):	Obiektowo zorientowane ¶rodowisko do analizowania danych
+Summary(pl.UTF-8):   Obiektowo zorientowane Å›rodowisko do analizowania danych
 Name:		root
 Version:	5.10.00
 Release:	0.1
@@ -13,8 +13,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 An object-oriented data analysis environment.
 
-%description -l pl
-Obiektowo zorientowane ¶rodowisko do analizowania danych.
+%description -l pl.UTF-8
+Obiektowo zorientowane Å›rodowisko do analizowania danych.
 
 %prep
 %setup -q -n %{name}
