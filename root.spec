@@ -1,5 +1,5 @@
 Summary:	An object-oriented data analysis environment
-Summary(pl.UTF-8):   Obiektowo zorientowane środowisko do analizowania danych
+Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
 Version:	5.10.00
 Release:	0.1
