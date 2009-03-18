@@ -1,16 +1,19 @@
 #
-# TODO: pass LDFLAGS
+# TODO: - pass LDFLAGS
+#	- BRs, bconds, package files
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
 Version:	5.22.00
 Release:	0.1
-License:	LGPL
+License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 # Source0-md5:	0d621315cf82abb02b2db951461be6f3
 URL:		http://root.cern.ch/
+BuildRequires:	freetype-devel
+BuildRequires:	xorg-lib-libXp-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,8 +29,12 @@ Obiektowo zorientowane środowisko do analizowania danych.
 ./configure linux \
 	--prefix="%{_prefix}" \
 	--with-cc="%{__cc} %{rpmcflags}" \
-	--with-cxx="%{__cxx} %{rpmcxxflags}"
-#	--with-ld="%{__cxx} %{rpmldflags}"
+	--with-cxx="%{__cxx} %{rpmcxxflags}" \
+	--disable-builtin-afterimage \
+	--disable-builtin-ftgl \
+	--disable-builtin-freetype \
+	--disable-builtin-pcre \
+	--disable-builtin-zlib
 	
 %{__make}
 
@@ -42,4 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS CREDITS ChangeLog NEWS README THANKS TODO
+%doc doc tutorials
+%{_datadir}/%{name}
+%{_mandir}/man1/*.1.gz
