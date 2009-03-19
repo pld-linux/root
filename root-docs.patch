@@ -1,6 +1,6 @@
---- root/Makefile~	2009-03-18 15:43:56.000000000 +0100
-+++ root/Makefile	2009-03-18 15:42:56.000000000 +0100
-@@ -963,17 +963,6 @@
+--- root/Makefile~	2009-03-19 12:39:09.000000000 +0100
++++ root/Makefile	2009-03-19 12:38:09.000000000 +0100
+@@ -963,22 +963,6 @@
  	   $(INSTALLDATA) fonts/*               $(DESTDIR)$(TTFFONTDIR); \
  	   find $(DESTDIR)$(TTFFONTDIR) -name CVS -exec rm -rf {} \; >/dev/null 2>&1; \
  	   find $(DESTDIR)$(TTFFONTDIR) -name .svn -exec rm -rf {} \; >/dev/null 2>&1; \
@@ -15,6 +15,11 @@
 -	   $(INSTALLDATA) tutorials/*           $(DESTDIR)$(TUTDIR); \
 -	   find $(DESTDIR)$(TUTDIR) -name CVS -exec rm -rf {} \; >/dev/null 2>&1; \
 -	   find $(DESTDIR)$(TUTDIR) -name .svn -exec rm -rf {} \; >/dev/null 2>&1; \
- 	   echo "Installing tests in $(DESTDIR)$(TESTDIR)"; \
- 	   $(INSTALLDIR)                        $(DESTDIR)$(TESTDIR); \
- 	   $(INSTALLDATA) test/*                $(DESTDIR)$(TESTDIR); \
+-	   echo "Installing tests in $(DESTDIR)$(TESTDIR)"; \
+-	   $(INSTALLDIR)                        $(DESTDIR)$(TESTDIR); \
+-	   $(INSTALLDATA) test/*                $(DESTDIR)$(TESTDIR); \
+-	   find $(DESTDIR)$(TESTDIR) -name CVS -exec rm -rf {} \; >/dev/null 2>&1; \
+-	   find $(DESTDIR)$(TESTDIR) -name .svn -exec rm -rf {} \; >/dev/null 2>&1; \
+ 	   echo "Installing macros in $(DESTDIR)$(MACRODIR)"; \
+ 	   $(INSTALLDIR)                        $(DESTDIR)$(MACRODIR); \
+ 	   $(INSTALLDATA) macros/*              $(DESTDIR)$(MACRODIR); \
