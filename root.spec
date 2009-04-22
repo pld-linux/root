@@ -14,8 +14,32 @@ Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 # Source0-md5:	0d621315cf82abb02b2db951461be6f3
 Patch0:		%{name}-docs.patch
 URL:		http://root.cern.ch/
-BuildRequires:	freetype-devel
-BuildRequires:	xorg-lib-libXp-devel
+BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	freetype-devel >= 2.0
+BuildRequires:	fftw3-devel
+BuildRequires:	ftgl-devel
+BuildRequires:	giflib-devel
+BuildRequires:	gmp-devel
+BuildRequires:	gsl-devel >= 1.8
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libtiff-devel
+BuildRequires:	libxml2-devel >= 1:2.4
+BuildRequires:	krb5-devel
+BuildRequires:	make >= 3.79.1
+BuildRequires:	mysql-devel >= 3.23
+BuildRequires:	openldap-devel
+BuildRequires:	openssl-devel
+BuildRequires:	pcre-devel >= 3.9
+BuildRequires:	postgresql-devel
+BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	unixODBC-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXft-devel
+BuildRequires:	xorg-lib-libXpm-devel
+BuildRequires:	zlib-devel
+# TODO???: oracle, rfio, shift, gfal, G4Navigator, apmon, pythia, dcap, chirp, glite, gapi, afterimage, srp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,14 +55,17 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %build
 ./configure linux \
 	--prefix="%{_prefix}" \
-	--with-cc="%{__cc} %{rpmcflags}" \
-	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
 	--disable-builtin-freetype \
 	--disable-builtin-pcre \
-	--disable-builtin-zlib
-	
+	--disable-builtin-zlib \
+	--with-cc="%{__cc} %{rpmcflags}" \
+	--with-cxx="%{__cxx} %{rpmcxxflags}" \
+	--with-x11-libdir=%{_libdir} \
+	--with-xpm-libdir=%{_libdir}
+# TODO: no way to pass xft,xext libdir
+
 %{__make}
 
 %install
@@ -54,4 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README/{CREDITS,ChangeLog-*,README*} doc tutorials
 %{_datadir}/%{name}
-%{_mandir}/man1/*.1.gz
+%{_mandir}/man1/*.1*
