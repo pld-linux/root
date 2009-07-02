@@ -25,7 +25,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel >= 1:2.4
-BuildRequires:	krb5-devel
+BuildRequires:	heimdal-devel
 BuildRequires:	make >= 3.79.1
 BuildRequires:	mysql-devel >= 3.23
 BuildRequires:	openldap-devel
