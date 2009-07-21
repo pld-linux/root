@@ -2,30 +2,31 @@
 # TODO: - pass LDFLAGS
 #	- BRs, bconds, package files
 #	- separate packages for tutorials/docs
+#	- fix krb5_net_read function redeclaration
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.22.00
+Version:	5.24.00
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	0d621315cf82abb02b2db951461be6f3
+# Source0-md5:	249c414bf34ed1e6660d2d829c2db964
 Patch0:		%{name}-docs.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
-BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	fftw3-devel
-BuildRequires:	ftgl-devel
+BuildRequires:	freetype-devel >= 2.0
+BuildRequires:	ftgl-devel >= 2.1.3~rc5
 BuildRequires:	giflib-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gsl-devel >= 1.8
+BuildRequires:	heimdal-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel >= 1:2.4
-BuildRequires:	heimdal-devel
 BuildRequires:	make >= 3.79.1
 BuildRequires:	mysql-devel >= 3.23
 BuildRequires:	openldap-devel
