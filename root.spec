@@ -2,17 +2,17 @@
 # TODO: - pass LDFLAGS
 #	- BRs, bconds, package files
 #	- separate packages for tutorials/docs
-#	- fix "Invalid option '-O2'" error
+#	- xrootd is disabled because of errors - re-enable it in future
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.25.02
+Version:	5.25.04
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	fbff404553b30c8fd365ccd4d26e9cb5
+# Source0-md5:	3347d8014f3cbe21eaeb7741b41114cd
 Patch0:		%{name}-docs.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
@@ -61,6 +61,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-freetype \
 	--disable-builtin-pcre \
 	--disable-builtin-zlib \
+	--disable-xrootd \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
