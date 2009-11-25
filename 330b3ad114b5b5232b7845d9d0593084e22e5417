@@ -1,0 +1,2 @@
+- updated to 5.25.04
+- disable xrootd for now (trying to build it causes build errors)
