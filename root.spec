@@ -34,7 +34,10 @@ BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel >= 3.9
 BuildRequires:	postgresql-devel
 BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python-modules
+BuildRequires:	sed >= 4.0
 BuildRequires:	unixODBC-devel
+BuildRequires:	which
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
@@ -42,6 +45,17 @@ BuildRequires:	xorg-lib-libXpm-devel
 BuildRequires:	zlib-devel
 # TODO???: oracle, rfio, shift, gfal, G4Navigator, apmon, pythia, dcap, chirp, glite, gapi, afterimage, srp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define	config_target	linux
+%ifarch %{x8664}
+%define	config_target	linuxx8664gcc
+%endif
+%ifarch ppc
+%define	config_target	linuxppcgcc
+%endif
+%ifarch ppc64
+%define	config_target	linuxppc64gcc
+%endif
 
 %description
 An object-oriented data analysis environment.
@@ -52,9 +66,10 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+sed '/check_library/s@ \\$@ %{_libdir} \\@' -i configure
 
 %build
-./configure linux \
+./configure %{config_target} \
 	--prefix="%{_prefix}" \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
