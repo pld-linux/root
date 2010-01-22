@@ -2,23 +2,23 @@
 # TODO: - pass LDFLAGS
 #	- BRs, bconds, package files
 #	- separate packages for tutorials/docs
-#	- fix krb5_net_read function redeclaration
+#	- xrootd is disabled because of errors - re-enable it in future
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.24.00
+Version:	5.26.00a
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	249c414bf34ed1e6660d2d829c2db964
+# Source0-md5:	aa92bd0ac7eb31ff81da76e91cd2980d
 Patch0:		%{name}-docs.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype-devel >= 2.0
-BuildRequires:	ftgl-devel >= 2.1.3~rc5
+BuildRequires:	ftgl-devel >= 2.1.3-0.rc5.1
 BuildRequires:	giflib-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gsl-devel >= 1.8
@@ -61,6 +61,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-freetype \
 	--disable-builtin-pcre \
 	--disable-builtin-zlib \
+	--disable-xrootd \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
