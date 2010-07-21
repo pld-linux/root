@@ -102,5 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README/{CREDITS,ChangeLog-*,README*} doc tutorials
 %attr(755,root,root) %{_bindir}/root
+%attr(755,root,root) %{_bindir}/root.exe
 %{_datadir}/%{name}
+%dir %{_libdir}/root
+%attr(755,root,root) %{_libdir}/root/*.so
 %{_mandir}/man1/*.1*
