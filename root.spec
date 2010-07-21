@@ -3,6 +3,7 @@
 #	- BRs, bconds, package files
 #	- separate packages for tutorials/docs
 #	- xrootd is disabled because of errors - re-enable it in future
+#	- files
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
