@@ -7,13 +7,14 @@
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.26.00c
+Version:	5.26.00d
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	721a51c38b96e1dceec3d8dd08274874
+# Source0-md5:	f11da997f41000ad7809f01ec794fecb
 Patch0:		%{name}-docs.patch
+Patch1:		%{name}-make_version.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	fftw3-devel
@@ -66,7 +67,8 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
-sed '/check_library/s@ \\$@ %{_libdir} \\@' -i configure
+%patch1 -p1
+%{__sed} '/check_library/s@ \\$@ %{_libdir} \\@' -i configure
 
 %build
 ./configure %{config_target} \
