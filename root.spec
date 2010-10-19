@@ -7,12 +7,12 @@
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.26.00d
+Version:	5.26.00e
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	f11da997f41000ad7809f01ec794fecb
+# Source0-md5:	555cfaefef72bbc159174a78f0319298
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-make_version.patch
 URL:		http://root.cern.ch/
