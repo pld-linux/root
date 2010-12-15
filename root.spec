@@ -85,7 +85,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %build
 ./configure %{config_target} \
 	--prefix=%{_prefix} \
-	--libdir=%{_libdir}/root
+	--libdir=%{_libdir}/root \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
 	--disable-builtin-freetype \
