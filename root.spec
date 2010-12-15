@@ -27,11 +27,12 @@ BuildRequires:	giflib-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gsl-devel >= 1.8
 BuildRequires:	heimdal-devel
+BuildRequires:	krb5-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel >= 1:2.4
-BuildRequires:	make >= 3.79.1
+BuildRequires:	make >= 3.80
 BuildRequires:	mysql-devel >= 3.23
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
@@ -85,6 +86,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-zlib \
 	--disable-xrootd \
 	--enable-gsl-shared \
+	--enable-krb5 \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
