@@ -27,7 +27,6 @@ BuildRequires:	giflib-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gsl-devel >= 1.8
 BuildRequires:	heimdal-devel
-BuildRequires:	krb5-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
@@ -86,7 +85,6 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-zlib \
 	--disable-xrootd \
 	--enable-gsl-shared \
-	--enable-krb5 \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
