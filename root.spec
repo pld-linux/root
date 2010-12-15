@@ -32,7 +32,7 @@ BuildRequires:	gsl-devel >= 1.8
 %if %{with krb5}
 BuildRequires:	krb5-devel
 %else
-BuildRequires:  heimdal-devel
+BuildRequires:	heimdal-devel
 %endif
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
@@ -84,7 +84,8 @@ Obiektowo zorientowane środowisko do analizowania danych.
 
 %build
 ./configure %{config_target} \
-	--prefix="%{_prefix}" \
+	--prefix=%{_prefix} \
+	--libdir=%{_libdir}/root
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
 	--disable-builtin-freetype \
