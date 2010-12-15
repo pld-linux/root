@@ -5,6 +5,9 @@
 #	- xrootd is disabled because of errors - re-enable it in future
 #	- files
 #
+#Conditional build:
+%bcond_with	krb5	# build with MIT kerberos
+#
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
@@ -26,7 +29,11 @@ BuildRequires:	ftgl-devel >= 2.1.3-0.rc5.1
 BuildRequires:	giflib-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gsl-devel >= 1.8
-BuildRequires:	heimdal-devel
+%if %{with krb5}
+BuildRequires:	krb5-devel
+%else
+BuildRequires:  heimdal-devel
+%endif
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
@@ -84,7 +91,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-pcre \
 	--disable-builtin-zlib \
 	--disable-xrootd \
-	--disable-krb5 \
+	%{!?with_krb5:--disable-krb5} \
 	--enable-gsl-shared \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
