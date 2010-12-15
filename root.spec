@@ -85,7 +85,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %build
 ./configure %{config_target} \
 	--prefix=%{_prefix} \
-	--libdir=%{_libdir}/root \
+	--libdir=%{_libdir}/%{name} \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
 	--disable-builtin-freetype \
@@ -114,9 +114,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README/{CREDITS,ChangeLog-*,README*} doc tutorials
+%attr(755,root,root) %{_bindir}/hadd
 %attr(755,root,root) %{_bindir}/root
 %attr(755,root,root) %{_bindir}/root.exe
+%attr(755,root,root) %{_bindir}/rootn.exe
+%attr(755,root,root) %{_bindir}/roots
+%attr(755,root,root) %{_bindir}/roots.exe
+%attr(755,root,root) %{_bindir}/ssh2rpd
 %{_datadir}/%{name}
-%dir %{_libdir}/root
-%attr(755,root,root) %{_libdir}/root/*.so
-%{_mandir}/man1/*.1*
+%{_mandir}/man1/hadd.1*
+%{_mandir}/man1/root.1*
+%{_mandir}/man1/root.exe.1*
+%{_mandir}/man1/rootn.exe.1*
+%{_mandir}/man1/roots.exe.1*
+%{_mandir}/man1/ssh2rpd.1*
