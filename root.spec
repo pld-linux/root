@@ -17,6 +17,7 @@ Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-namespaces.patch
 Patch2:		%{name}-make_version.patch
+Patch3:		%{name}-krb5_functions.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	fftw3-devel
@@ -71,6 +72,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %{__sed} -i '/check_library/s@ \\$@ %{_libdir} \\@' configure
 
 %build

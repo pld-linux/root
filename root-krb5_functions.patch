@@ -1,0 +1,18 @@
+--- root/net/krb5auth/src/TKSocket.cxx~	2010-12-14 15:20:23.000000000 +0100
++++ root/net/krb5auth/src/TKSocket.cxx	2010-12-15 15:01:54.534983335 +0100
+@@ -11,15 +11,6 @@
+ #include "TError.h"
+ 
+ 
+-extern "C" {
+-// missing from "krb5.h"
+-extern int krb5_net_read(/*IN*/ krb5_context context, int fd,
+-                         /*OUT*/ char *buf,/*IN*/ int len);
+-
+-extern int krb5_net_write(/*IN*/ krb5_context context, int fd,
+-                          const char *buf, int len);
+-}
+-
+ 
+ ClassImp(TKSocket)
+ 
