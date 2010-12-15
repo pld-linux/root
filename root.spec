@@ -14,7 +14,7 @@ Name:		root
 Version:	5.28.00
 Release:	0.1
 License:	LGPL v2.1+
-Group:		Applications
+Group:		Applications/Engineering
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 # Source0-md5:	fc30b6410295ae2df9e74064fc84539d
 Patch0:		%{name}-docs.patch
