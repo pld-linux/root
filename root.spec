@@ -3,18 +3,20 @@
 #	- BRs, bconds, package files
 #	- separate packages for tutorials/docs
 #	- xrootd is disabled because of errors - re-enable it in future
+#	- files
 #
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.26.00e
+Version:	5.28.00
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	555cfaefef72bbc159174a78f0319298
+# Source0-md5:	fc30b6410295ae2df9e74064fc84539d
 Patch0:		%{name}-docs.patch
-Patch1:		%{name}-make_version.patch
+Patch1:		%{name}-namespaces.patch
+Patch2:		%{name}-make_version.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	fftw3-devel
@@ -68,7 +70,8 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
-%{__sed} '/check_library/s@ \\$@ %{_libdir} \\@' -i configure
+%patch2 -p1
+%{__sed} -i '/check_library/s@ \\$@ %{_libdir} \\@' configure
 
 %build
 ./configure %{config_target} \
@@ -100,5 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README/{CREDITS,ChangeLog-*,README*} doc tutorials
+%attr(755,root,root) %{_bindir}/root
+%attr(755,root,root) %{_bindir}/root.exe
 %{_datadir}/%{name}
+%dir %{_libdir}/root
+%attr(755,root,root) %{_libdir}/root/*.so
 %{_mandir}/man1/*.1*
