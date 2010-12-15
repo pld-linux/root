@@ -84,6 +84,7 @@ Obiektowo zorientowane środowisko do analizowania danych.
 	--disable-builtin-pcre \
 	--disable-builtin-zlib \
 	--disable-xrootd \
+	--disable-krb5 \
 	--enable-gsl-shared \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
