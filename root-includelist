@@ -1,13 +1,12 @@
 include $(MODULE)/Module.mk
 includelist:
-	@list=includelist-`echo $(MODULE) | tr / -` ; \
+	@list=includelist-`tr / - <<< $(MODULE)` ; \
 	rm -f $$list ; \
 	for h in $(filter-out %.cw %.pri, $(ALLHDRS)) ; do \
 	    if [ "$(MODULE)" = "cint/cint7" ] ; then \
-		echo $$h | sed 's!^include!%{_includedir}/%{name}/cint7!' >> $$list ; \
-		echo $$list ; \
+		sed 's!^include!%{_includedir}/%{name}/cint7!' <<< $$h >> $$list ; \
 	    else \
-		echo $$h | sed 's!^include!%{_includedir}/%{name}!' >> $$list ; \
+		sed 's!^include!%{_includedir}/%{name}!' <<< $$h >> $$list ; \
 	    fi ; \
 	    sort -u $$list > $$list.unique ; \
 	    mv $$list.unique $$list ; \
