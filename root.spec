@@ -18,6 +18,8 @@ License:	LGPL v2.1+
 Group:		Applications/Engineering
 Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
 # Source0-md5:	fc30b6410295ae2df9e74064fc84539d
+# Script to extract the list of include files in a subpackage
+Source1:	%{name}-includelist
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-namespaces.patch
 Patch2:		%{name}-make_version.patch
@@ -173,6 +175,9 @@ formatach, między innymi JPEG, PNG oraz TIFF.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
 # Remove some junk
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/BUILDSYSTEM
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
@@ -180,8 +185,22 @@ rm -rf $RPM_BUILD_ROOT
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+# Create includelist files ...
+for module in `find * -name Module.mk` ; do
+	module=`dirname $module`
+	make -f %{SOURCE1} includelist MODULE=$module
+done
+
+# ... and merge some of them
+cat includelist-core-[^w]* > includelist-core
+cat includelist-io-io >> includelist-core
+cat includelist-geom-geom* > includelist-geom
+cat includelist-roofit-* > includelist-roofit
+cat includelist-gui-qt* > includelist-gui-qt
+cat includelist-graf2d-x11ttf >> includelist-graf2d-x11
+cat includelist-gui-guihtml >> includelist-gui-gui
+cat includelist-io-xmlparser >> includelist-io-xml
+cat includelist-proof-proofplayer >> includelist-proof-proof
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -215,7 +234,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 #%%doc %{_docdir}/%{name}-%{version}/html
 
-%files core
+%files core -f includelist-core
 %defattr(644,root,root,755)
 #%%doc %{_docdir}/%{name}-%{version}/CREDITS
 #%%doc %{_docdir}/%{name}-%{version}/README
@@ -240,7 +259,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/%{name}/Math
 %{_aclocaldir}/root.m4
 
-%files graf-asimage
+%files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/libASImage.*
 %{_libdir}/%{name}/libASImageGui.*
