@@ -4,7 +4,8 @@
 #	- separate packages for tutorials/docs
 #	- xrootd is disabled because of errors - re-enable it in future
 #	- files
-#	- dosn't build on 64 bits
+#	- doesn't build on 64 bits
+#	- fix root-includelist script
 #
 #Conditional build:
 %bcond_with	krb5	# build with MIT kerberos
