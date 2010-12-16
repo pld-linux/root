@@ -181,7 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/%{name}/icons
 
-%files core -f includelist-core
+%files core
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/memprobe
 %attr(755,root,root) %{_bindir}/rlibmap
