@@ -74,6 +74,53 @@ An object-oriented data analysis environment.
 %description -l pl.UTF-8
 Obiektowo zorientowane środowisko do analizowania danych.
 
+%package icons
+Summary:	ROOT icon collection
+Summary(pl.UTF-8):	Zbiór icon dla ROOT
+Group:		Applications/Engineering
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description icons
+This package contains icons used by the ROOT GUI.
+
+%description icons -l pl.UTF-8
+Ten pakiet zawiera ikony używane przez GUI ROOT.
+
+%package core
+Summary:	ROOT core libraries
+Summary(pl.UTF-8):	Biblioteki główne ROOT
+License:	LGPL v2+ and BSD
+Group:		Libraries
+Requires:	%{name}-graf-asimage = %{version}-%{release}
+Requires:	%{name}-icons = %{version}-%{release}
+Requires:	fonts-TTF-RedHat-liberation
+Requires:	xorg-font-font-misc-misc-ISO8859-1
+
+%description core
+This package contains the core libraries used by ROOT: libCore,
+libNew, libRint, libRIO and libThread.
+
+%description core -l pl.UTF-8
+Ten pakiet zawiera główne biblioteki używane przez ROOT: libCore,
+libNew, libRint, libRIO oraz libThread.
+
+%package graf-asimage
+Summary:	AfterImage graphics renderer for ROOT
+Summary(pl.UTF-8):	Grafinczy renderer AfterImage dla ROOT
+Group:		Libraries
+Requires:	%{name}-core = %{version}-%{release}
+
+%description graf-asimage
+This package contains the AfterImage renderer for ROOT, which allows
+you to store output graphics in many formats, including JPEG, PNG and
+TIFF.
+
+%description graf-asimage -l pl.UTF-8
+Ten pakiet zawiera renderer AfterImage dla ROOT, który umożliwia
+użytkownikowi przechowywanie wyjściowych plików graficznych w wielu
+formatach, między innymi JPEG, PNG oraz TIFF.
+
 %prep
 %setup -q -n %{name}
 %patch0 -p1
@@ -116,7 +163,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README/{CREDITS,ChangeLog-*,README*} doc tutorials
 %attr(755,root,root) %{_bindir}/hadd
 %attr(755,root,root) %{_bindir}/root
 %attr(755,root,root) %{_bindir}/root.exe
@@ -124,10 +170,41 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/roots
 %attr(755,root,root) %{_bindir}/roots.exe
 %attr(755,root,root) %{_bindir}/ssh2rpd
-%{_datadir}/%{name}
 %{_mandir}/man1/hadd.1*
 %{_mandir}/man1/root.1*
 %{_mandir}/man1/root.exe.1*
 %{_mandir}/man1/rootn.exe.1*
 %{_mandir}/man1/roots.exe.1*
 %{_mandir}/man1/ssh2rpd.1*
+
+%files icons
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/icons
+
+%files core -f includelist-core
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/memprobe
+%attr(755,root,root) %{_bindir}/rlibmap
+%attr(755,root,root) %{_bindir}/rmkdepend
+%attr(755,root,root) %{_bindir}/root-config
+%{_mandir}/man1/memprobe.1*
+%{_mandir}/man1/rmkdepend.1*
+%{_mandir}/man1/rlibmap.1*
+%{_mandir}/man1/root-config.1*
+%{_libdir}/%{name}/libCore.*
+%{_libdir}/%{name}/libNew.*
+%{_libdir}/%{name}/libRint.*
+%{_libdir}/%{name}/libRIO.*
+%{_libdir}/%{name}/libThread.*
+%{_libdir}/%{name}/lib[^R]*Dict.*
+%{_includedir}/%{name}/RConfigOptions.h
+%{_includedir}/%{name}/RConfigure.h
+%{_includedir}/%{name}/compiledata.h
+%{_includedir}/%{name}/rmain.cxx
+%dir %{_includedir}/%{name}/Math
+%{_aclocaldir}/root.m4
+
+%files graf-asimage
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libASImage.*
+%{_libdir}/%{name}/libASImageGui.*
