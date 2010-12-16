@@ -4,6 +4,7 @@
 #	- separate packages for tutorials/docs
 #	- xrootd is disabled because of errors - re-enable it in future
 #	- files
+#	- dosn't build on 64 bits
 #
 #Conditional build:
 %bcond_with	krb5	# build with MIT kerberos
@@ -87,6 +88,21 @@ This package contains icons used by the ROOT GUI.
 %description icons -l pl.UTF-8
 Ten pakiet zawiera ikony używane przez GUI ROOT.
 
+%package doc
+Summary:	Documentation for the ROOT system
+Summary(pl.UTF-8):	Dokumentacja dla systemu ROOT
+License:	LGPLv2+ and GPLv2+ and BSD
+Requires:	%{name}-cint = %{version}-%{release}
+BuildArch:	noarch
+
+%description doc
+This package contains the automatically generated ROOT class
+documentation.
+
+%description doc -l pl.UTF-8
+Ten pakiet zawiera automatycznie wygenerowaną klasę dokumentacji dla
+ROOT.
+
 %package core
 Summary:	ROOT core libraries
 Summary(pl.UTF-8):	Biblioteki główne ROOT
@@ -136,6 +152,7 @@ formatach, między innymi JPEG, PNG oraz TIFF.
 ./configure %{config_target} \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir}/%{name} \
+	--docdir=%{_docdir}/%{name}-%{version} \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
 	--disable-builtin-freetype \
@@ -154,6 +171,13 @@ formatach, między innymi JPEG, PNG oraz TIFF.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+# Remove some junk
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/BUILDSYSTEM
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -181,8 +205,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/%{name}/icons
 
+%files doc
+%defattr(644,root,root,755)
+%doc %{_docdir}/%{name}-%{version}/html
+
 %files core
 %defattr(644,root,root,755)
+%doc %{_docdir}/%{name}-%{version}/CREDITS
+%doc %{_docdir}/%{name}-%{version}/README
 %attr(755,root,root) %{_bindir}/memprobe
 %attr(755,root,root) %{_bindir}/rlibmap
 %attr(755,root,root) %{_bindir}/rmkdepend
