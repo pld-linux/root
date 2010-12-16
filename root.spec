@@ -186,6 +186,11 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post core -p /sbin/ldconfig
+%postun core -p /sbin/ldconfig
+%post graf-asimage -p /sbin/ldconfig
+%postun graf-asimage -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hadd
