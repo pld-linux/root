@@ -79,7 +79,10 @@ Obiektowo zorientowane środowisko do analizowania danych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%if %{with krb5}
 %patch3 -p1
+%endif
+
 %{__sed} -i '/check_library/s@ \\$@ %{_libdir} \\@' configure
 
 %build
