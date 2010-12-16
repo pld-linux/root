@@ -91,7 +91,8 @@ Ten pakiet zawiera ikony używane przez GUI ROOT.
 %package doc
 Summary:	Documentation for the ROOT system
 Summary(pl.UTF-8):	Dokumentacja dla systemu ROOT
-License:	LGPLv2+ and GPLv2+ and BSD
+License:	LGPL v2+ and GPL v2+ and BSD
+Group:		Documentation
 Requires:	%{name}-cint = %{version}-%{release}
 BuildArch:	noarch
 
