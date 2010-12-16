@@ -174,11 +174,11 @@ formatach, między innymi JPEG, PNG oraz TIFF.
 rm -rf $RPM_BUILD_ROOT
 
 # Remove some junk
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/BUILDSYSTEM
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
+#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/BUILDSYSTEM
+#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
+#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
+#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
+#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -213,12 +213,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc %{_docdir}/%{name}-%{version}/html
+#%%doc %{_docdir}/%{name}-%{version}/html
 
 %files core
 %defattr(644,root,root,755)
-%doc %{_docdir}/%{name}-%{version}/CREDITS
-%doc %{_docdir}/%{name}-%{version}/README
+#%%doc %{_docdir}/%{name}-%{version}/CREDITS
+#%%doc %{_docdir}/%{name}-%{version}/README
 %attr(755,root,root) %{_bindir}/memprobe
 %attr(755,root,root) %{_bindir}/rlibmap
 %attr(755,root,root) %{_bindir}/rmkdepend
