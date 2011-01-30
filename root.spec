@@ -27,6 +27,7 @@ Patch2:		%{name}-make_version.patch
 Patch3:		%{name}-krb5_functions.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	automake
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	ftgl-devel >= 2.1.3-0.rc5.1
@@ -47,6 +48,7 @@ BuildRequires:	mysql-devel >= 3.23
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel >= 3.9
+BuildRequires:	pkgconfig
 BuildRequires:	postgresql-devel
 BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-modules
@@ -83,7 +85,6 @@ Summary:	ROOT icon collection
 Summary(pl.UTF-8):	Zbiór icon dla ROOT
 Group:		Applications/Engineering
 Requires:	%{name}-core = %{version}-%{release}
-BuildArch:	noarch
 
 %description icons
 This package contains icons used by the ROOT GUI.
@@ -97,7 +98,6 @@ Summary(pl.UTF-8):	Dokumentacja dla systemu ROOT
 License:	LGPL v2+ and GPL v2+ and BSD
 Group:		Documentation
 Requires:	%{name}-cint = %{version}-%{release}
-BuildArch:	noarch
 
 %description doc
 This package contains the automatically generated ROOT class
@@ -187,17 +187,18 @@ rm -rf $RPM_BUILD_ROOT
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
 
 # Create includelist files ...
+RPM_BUILD_DIR=$(pwd)
 for module in `find * -name Module.mk` ; do
 	module=`dirname $module`
-	make -f %{SOURCE1} includelist MODULE=$module
+	make -f %{SOURCE1} includelist MODULE=$module ROOT_SRCDIR=$RPM_BUILD_DIR
 done
 
 # ... and merge some of them
-cat includelist-core-[^w]* > includelist-core
+cat includelist-core-[^we]* > includelist-core
 cat includelist-io-io >> includelist-core
 cat includelist-geom-geom* > includelist-geom
 cat includelist-roofit-* > includelist-roofit
-cat includelist-gui-qt* > includelist-gui-qt
+cat includelist-gui-qt* > includelist-guiqt
 cat includelist-graf2d-x11ttf >> includelist-graf2d-x11
 cat includelist-gui-guihtml >> includelist-gui-gui
 cat includelist-io-xmlparser >> includelist-io-xml
