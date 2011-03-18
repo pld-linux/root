@@ -284,6 +284,18 @@ access legacy Hbook files (NTuples and Histograms from PAW).
 Ten pakiet zawiera bibliotekę Hbook dla ROOT, umożliwiającą dostęp do
 starszych plików Hbooka (NTuples i Histograms z PAW).
 
+%package hist
+Summary:	Histogram library for ROOT
+Summary(pl.UTF-8):	Biblioteka histogramu dla ROOT
+Group:		Applications/Engineering
+Requires:	%{name}-hist-painter = %{version}-%{release}
+
+%description hist
+This package contains a library for histogramming in ROOT.
+
+%description hist -l pl.UTF-8
+Ten pakiet zawiera bibliotekę do tworzenia histogramów w ROOT.
+
 %package proof-pq2
 Summary:	PROOF Quick Query (pq2)
 Summary(pl.UTF-8):	Szybkie Zapytanie PROFF (PROOF Quick Query - pq2)
@@ -385,6 +397,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun graf3d -p /sbin/ldconfig
 %post hbook -p /sbin/ldconfig
 %postun hbook -p /sbin/ldconfig
+%post hist -p /sbin/ldconfig
+%postun hist -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
 %postun reflex -p /sbin/ldconfig
 
@@ -523,6 +537,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libminicern.so
 %attr(755,root,root) %{_libdir}/%{name}/libHbook.so
 %{_libdir}/%{name}/libHbook.rootmap
+
+%files hist -f includelist-hist-hist
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libHist.so
+%{_libdir}/%{name}/libHist.rootmap
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
