@@ -202,7 +202,7 @@ Group:		Libraries
 %description geom
 This package contains a library for defining geometries in ROOT.
 
-%description graf-asimage -l pl.UTF-8
+%description geom -l pl.UTF-8
 Ten pakiet zawiera bibliotekę do definiowania geomterii w ROOT.
 
 %package graf-asimage
