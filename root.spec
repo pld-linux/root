@@ -277,8 +277,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files core -f includelist-core
 %defattr(644,root,root,755)
-#%%doc %{_docdir}/%{name}-%{version}/CREDITS
-#%%doc %{_docdir}/%{name}-%{version}/README
 %attr(755,root,root) %{_bindir}/memprobe
 %attr(755,root,root) %{_bindir}/rlibmap
 %attr(755,root,root) %{_bindir}/rmkdepend
