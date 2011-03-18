@@ -205,6 +205,17 @@ This package contains a library for defining geometries in ROOT.
 %description geom -l pl.UTF-8
 Ten pakiet zawiera bibliotekę do definiowania geomterii w ROOT.
 
+%package graf
+Summary:	2D graphics library for ROOT
+Summary(pl.UTF-8):	Biblioteka graficzna 2D dla ROOT
+Group:		Libraries
+
+%description graf
+This package contains the 2-dimensional graphics library for ROOT.
+
+%description graf -l pl.UTF-8
+Ten pakiet zawiera dwuwymiarową bibliotekę graficzną dla ROOT.
+
 %package graf-asimage
 Summary:	AfterImage graphics renderer for ROOT
 Summary(pl.UTF-8):	Grafinczy renderer AfterImage dla ROOT
@@ -362,6 +373,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun cint -p /sbin/ldconfig
 %post geom -p /sbin/ldconfig
 %postun geom -p /sbin/ldconfig
+%post graf -p /sbin/ldconfig
+%postun graf -p /sbin/ldconfig
 %post graf-asimage -p /sbin/ldconfig
 %postun graf-asimage -p /sbin/ldconfig
 %post graf-gpad -p /sbin/ldconfig
@@ -405,11 +418,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/rmkdepend.1*
 %{_mandir}/man1/rlibmap.1*
 %{_mandir}/man1/root-config.1*
-%{_libdir}/%{name}/libCore.*
-%{_libdir}/%{name}/libNew.*
-%{_libdir}/%{name}/libRint.*
-%{_libdir}/%{name}/libThread.*
-%{_libdir}/%{name}/lib[^R]*Dict.*
+%attr(755,root,root) %{_libdir}/%{name}/libCore.*
+%attr(755,root,root) %{_libdir}/%{name}/libNew.*
+%attr(755,root,root) %{_libdir}/%{name}/libRint.*
+%attr(755,root,root) %{_libdir}/%{name}/libThread.*
+%attr(755,root,root) %{_libdir}/%{name}/lib[^R]*Dict.*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/class.rules
 %{_datadir}/%{name}/gdb-backtrace.sh
@@ -430,8 +443,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rootcint
 %{_mandir}/man1/rootcint.1*
 %dir %{_libdir}/%{name}
-%{_libdir}/%{name}/libCint.so
-%{_libdir}/%{name}/cint
+%attr(755,root,root) %{_libdir}/%{name}/libCint.so
+%attr(755,root,root) %{_libdir}/%{name}/cint
 %dir %{_includedir}/%{name}
 
 %files reflex -f includelist-cint-reflex
@@ -442,10 +455,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/genmap.1*
 %{_mandir}/man1/genreflex.1*
 %{_mandir}/man1/genreflex-rootcint.1*
-%{_libdir}/%{name}/libReflex.so
-%{_libdir}/%{name}/libReflexDict.so
-%{_libdir}/%{name}/libReflexDict.rootmap
-%{_libdir}/%{name}/python
+%attr(755,root,root) %{_libdir}/%{name}/libReflex.so
+%attr(755,root,root) %{_libdir}/%{name}/libReflexDict.so
+%attr(755,root,root) %{_libdir}/%{name}/libReflexDict.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/python
 %dir %{_includedir}/%{name}/Reflex
 %dir %{_includedir}/%{name}/Reflex/Builder
 %dir %{_includedir}/%{name}/Reflex/internal
@@ -456,31 +469,39 @@ rm -rf $RPM_BUILD_ROOT
 
 %files geom -f includelist-geom
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libGeom.so
-%{_libdir}/%{name}/libGeom.rootmap
-%{_libdir}/%{name}/libGeomBuilder.so
-%{_libdir}/%{name}/libGeomBuilder.rootmap
-%{_libdir}/%{name}/libGeomPainter.so
-%{_libdir}/%{name}/libGeomPainter.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libGeom.so
+%attr(755,root,root) %{_libdir}/%{name}/libGeom.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libGeomBuilder.so
+%attr(755,root,root) %{_libdir}/%{name}/libGeomBuilder.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libGeomPainter.so
+%attr(755,root,root) %{_libdir}/%{name}/libGeomPainter.rootmap
 %{_datadir}/%{name}/plugins/TGeoManagerEditor/P010_TGeoManagerEditor.C
 %{_datadir}/%{name}/plugins/TVirtualGeoPainter/P010_TGeoPainter.C
 %{_datadir}/%{name}/RadioNuclides.txt
 
+%files graf -f includelist-graf2d-graf
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libGraf.so
+%attr(755,root,root) %{_libdir}/%{name}/libGraf.rootmap
+%{_datadir}/%{name}/plugins/TMinuitGraph/P010_TGraph.C
+
 %files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libASImage.so
-%{_libdir}/%{name}/libASImageGui.so
+%attr(755,root,root) %{_libdir}/%{name}/libASImage.so
+%attr(755,root,root) %{_libdir}/%{name}/libASImageGui.so
 
 %files graf-gpad -f includelist-graf2d-gpad
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libGpad.so
-%{_libdir}/%{name}/libGpad.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libGpad.so
+%attr(755,root,root) %{_libdir}/%{name}/libGpad.rootmap
+%dir %{_datadir}/%{name}/plugins/TVirtualPad
 %{_datadir}/%{name}/plugins/TVirtualPad/P010_TPad.C
 
 %files graf-postscript -f includelist-graf2d-postscript
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libPostscript.so
-%{_libdir}/%{name}/libPostscript.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libPostscript.so
+%attr(755,root,root) %{_libdir}/%{name}/libPostscript.rootmap
+%dir %{_datadir}/%{name}/plugins/TVirtualPS
 %{_datadir}/%{name}/plugins/TVirtualPS/P010_TPostScript.C
 %{_datadir}/%{name}/plugins/TVirtualPS/P020_TSVG.C
 %{_datadir}/%{name}/plugins/TVirtualPS/P030_TPDF.C
@@ -488,8 +509,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files graf3d -f includelist-graf3d-g3d
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libGraf3d.so
-%{_libdir}/%{name}/libGraf3d.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libGraf3d.so
+%attr(755,root,root) %{_libdir}/%{name}/libGraf3d.rootmap
+%dir %{_datadir}/%{name}/plugins/TView
 %{_datadir}/%{name}/plugins/TView/P010_TView3D.C
 
 %files hbook -f includelist-hist-hbook
@@ -498,9 +520,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/h2root
 %{_mandir}/man1/g2root.1*
 %{_mandir}/man1/h2root.1*
-%{_libdir}/%{name}/libminicern.so
-%{_libdir}/%{name}/libHbook.so
-%{_libdir}/%{name}/libHbook.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libminicern.so
+%attr(755,root,root) %{_libdir}/%{name}/libHbook.so
+%attr(755,root,root) %{_libdir}/%{name}/libHbook.rootmap
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
