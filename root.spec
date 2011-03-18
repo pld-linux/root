@@ -194,6 +194,17 @@ documentation.
 Ten pakiet zawiera automatycznie wygenerowaną klasę dokumentacji dla
 ROOT.
 
+%package geom
+Summary:	Geometry library for ROOT
+Summary(pl.UTF-8):	Biblioteka geometryczna dla ROOT
+Group:		Libraries
+
+%description geom
+This package contains a library for defining geometries in ROOT.
+
+%description graf-asimage -l pl.UTF-8
+Ten pakiet zawiera bibliotekę do definiowania geomterii w ROOT.
+
 %package graf-asimage
 Summary:	AfterImage graphics renderer for ROOT
 Summary(pl.UTF-8):	Grafinczy renderer AfterImage dla ROOT
@@ -235,6 +246,20 @@ postscript and PDF output.
 Ten pakiet zawiera bibliotekę dla ROOT, która umożliwia renderowanie
 postscript i zapis do PDF.
 
+%package graf3d
+Summary:	Basic 3D shapes library for ROOT
+Summary(pl.UTF-8):	Podstawowe kształty 3D dla ROOT
+Group:		Libraries
+
+%description graf3d
+This library contains the basic 3D shapes and classes for ROOT. For a
+more full-blown geometry library, see the root-geom package.
+
+%description graf3d -l pl.UTF-8
+Ta biblioteka zawiera podstawowe kształty 3D oraz klasy dla ROOT.
+Biblioteka zawierająca bardziej rozwinięte kształty znajduje się w
+pakiecie root-geom.
+
 %package hbook
 Summary:	Hbook library for ROOT
 Summary(pl.UTF-8):	Biblioteka Hbook dla ROOT
@@ -269,6 +294,10 @@ Konsolowy interfejs do obsługi zestawów danych PROFF.
 %endif
 
 %{__sed} -i '/check_library/s@ \\$@ %{_libdir} \\@' configure
+
+# Remove embedded sources in order to be sure they are not used
+#  * ftgl
+%{__rm} -r graf3d/ftgl/src graf3d/ftgl/inc
 
 %build
 ./configure %{config_target} \
@@ -331,12 +360,16 @@ rm -rf $RPM_BUILD_ROOT
 %postun core -p /sbin/ldconfig
 %post cint -p /sbin/ldconfig
 %postun cint -p /sbin/ldconfig
+%post geom -p /sbin/ldconfig
+%postun geom -p /sbin/ldconfig
 %post graf-asimage -p /sbin/ldconfig
 %postun graf-asimage -p /sbin/ldconfig
 %post graf-gpad -p /sbin/ldconfig
 %postun graf-gpad -p /sbin/ldconfig
 %post graf-postscript -p /sbin/ldconfig
 %postun graf-postscript -p /sbin/ldconfig
+%post graf3d -p /sbin/ldconfig
+%postun graf3d -p /sbin/ldconfig
 %post hbook -p /sbin/ldconfig
 %postun hbook -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
@@ -421,6 +454,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 #%%doc %{_docdir}/%{name}-%{version}/html
 
+%files geom -f includelist-geom
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libGeom.so
+%{_libdir}/%{name}/libGeom.rootmap
+%{_libdir}/%{name}/libGeomBuilder.so
+%{_libdir}/%{name}/libGeomBuilder.rootmap
+%{_libdir}/%{name}/libGeomPainter.so
+%{_libdir}/%{name}/libGeomPainter.rootmap
+%{_datadir}/%{name}/plugins/TGeoManagerEditor/P010_TGeoManagerEditor.C
+%{_datadir}/%{name}/plugins/TVirtualGeoPainter/P010_TGeoPainter.C
+%{_datadir}/%{name}/RadioNuclides.txt
+
 %files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/libASImage.so
@@ -440,6 +485,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/plugins/TVirtualPS/P020_TSVG.C
 %{_datadir}/%{name}/plugins/TVirtualPS/P030_TPDF.C
 %{_datadir}/%{name}/plugins/TVirtualPS/P040_TImageDump.C
+
+%files graf3d -f includelist-graf3d-g3d
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libGraf3d.so
+%{_libdir}/%{name}/libGraf3d.rootmap
+%{_datadir}/%{name}/plugins/TView/P010_TView3D.C
 
 %files hbook -f includelist-hist-hbook
 %defattr(644,root,root,755)
