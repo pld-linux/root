@@ -171,6 +171,18 @@ libNew, libRint, libRIO and libThread.
 Ten pakiet zawiera główne biblioteki używane przez ROOT: libCore,
 libNew, libRint, libRIO oraz libThread.
 
+%package cint
+Summary:	CINT C++ interpreter
+Summary(pl.UTF-8):	Interpreter CINT C++
+License:	MIT
+Group:		Applications/Engineering
+
+%description cint
+This package contains the CINT C++ interpreter version 5.
+
+%description cint -l pl.UTF-8
+Ten pakiet zawiera interpreter CINT C++ w wersji 5.
+
 %package graf-asimage
 Summary:	AfterImage graphics renderer for ROOT
 Summary(pl.UTF-8):	Grafinczy renderer AfterImage dla ROOT
@@ -264,10 +276,10 @@ rm -rf $RPM_BUILD_ROOT
 
 # Remove some junk
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/drop_from_path
-#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
-#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
-#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
-#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.MONALISA
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/cint.1
+
+# Remove cintdll sources - keep the prec_stl directory
+%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/%{name}/cint/cint/lib/{[^p],p[^r]}*
 
 # Create includelist files ...
 RPM_BUILD_DIR=$(pwd)
@@ -292,6 +304,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post core -p /sbin/ldconfig
 %postun core -p /sbin/ldconfig
+%post cint -p /sbin/ldconfig
+%postun cint -p /sbin/ldconfig
 %post graf-asimage -p /sbin/ldconfig
 %postun graf-asimage -p /sbin/ldconfig
 %post hbook -p /sbin/ldconfig
@@ -345,6 +359,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/%{name}/rmain.cxx
 %dir %{_includedir}/%{name}/Math
 %{_aclocaldir}/root.m4
+
+%files cint -f includelist-cint-cint
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/rootcint
+%{_mandir}/man1/rootcint.1*
+%{_libdir}/%{name}/libCint.so
+%{_libdir}/%{name}/cint
 
 %files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
