@@ -287,6 +287,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/g2root.1*
 %{_mandir}/man1/h2root.1*
 %{_libdir}/%{name}/libminicern.so
-%{_libdir}/%{name}/libminicern.rootmap
 %{_libdir}/%{name}/libHbook.so
 %{_libdir}/%{name}/libHbook.rootmap
