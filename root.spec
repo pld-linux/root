@@ -152,6 +152,28 @@ access legacy Hbook files (NTuples and Histograms from PAW).
 Ten pakiet zawiera bibliotekę Hbook dla ROOT, umożliwiającą dostęp do
 starszych plików Hbooka (NTuples i Histograms z PAW).
 
+%package proof-pq2
+Summary:	PROOF Quick Query (pq2)
+Summary(pl.UTF-8):	Szybkie Zapytanie PROFF (PROOF Quick Query - pq2)
+Group:		Applications/Engineering
+
+%description proof-pq2
+Shell-based interface to the PROOF dataset handling.
+
+%description proof-pq2 -l pl.UTF-8
+Konsolowy interfejs do obsługi zestawów danych PROFF.
+
+%package reflex
+Summary:	Reflex dictionary generator
+Summary(pl.UTF-8):	Generator słownika reflex
+Group:		Libraries
+
+%description reflex
+This package contains the reflex dictionary generator for ROOT.
+
+%description reflex -l pl.UTF-8
+Ten pakiet zawiera generator słownika reflex dla ROOT.
+
 %prep
 %setup -q -n %{name}
 %patch0 -p1
@@ -177,6 +199,7 @@ starszych plików Hbooka (NTuples i Histograms z PAW).
 	--disable-xrootd \
 	%{!?with_krb5:--disable-krb5} \
 	--enable-gsl-shared \
+	--enable-reflex \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
@@ -225,6 +248,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun graf-asimage -p /sbin/ldconfig
 %post hbook -p /sbin/ldconfig
 %postun hbook -p /sbin/ldconfig
+%post reflex -p /sbin/ldconfig
+%postun reflex -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -289,3 +314,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/libminicern.so
 %{_libdir}/%{name}/libHbook.so
 %{_libdir}/%{name}/libHbook.rootmap
+
+%files proof-pq2 -f includelist-proof-pq2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pq2*
+%{_mandir}/man1/pq2*.1*
+
+%files reflex -f includelist-cint-reflex
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/genmap
+%attr(755,root,root) %{_bindir}/genreflex
+%attr(755,root,root) %{_bindir}/genreflex-rootcint
+%{_mandir}/man1/genmap.1*
+%{_mandir}/man1/genreflex.1*
+%{_mandir}/man1/genreflex-rootcint.1*
+%{_libdir}/%{name}/libReflex.so
+%{_libdir}/%{name}/libReflex.rootmap
+%{_libdir}/%{name}/libReflexDict.so
+%{_libdir}/%{name}/libReflexDict.so.rootmap
+%{_libdir}/%{name}/python
+%dir %{_includedir}/%{name}/Reflex
+%dir %{_includedir}/%{name}/Reflex/Builder
+%dir %{_includedir}/%{name}/Reflex/internal
