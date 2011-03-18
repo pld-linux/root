@@ -123,7 +123,7 @@ System został zaprojektowany w sposób umożliwiający równoległe
 odpytywanie jego baz danych na maszynach MPP, na klastrach stacji
 roboczych lub końcowych PC-tach. ROOT jest otwartym systemem, który
 może być dynamicznie rozszerzany poprzez linkowanie zewnętrznych
-bibliotek. To czyni ROOT-a podstawową platformą do budowy akwizycji
+bibliotek. To czyni ROOT podstawową platformą do budowy akwizycji
 danych, symulacji oraz systemów analizy danych.
 
 %package icons
@@ -137,21 +137,6 @@ This package contains icons used by the ROOT GUI.
 
 %description icons -l pl.UTF-8
 Ten pakiet zawiera ikony używane przez GUI ROOT.
-
-%package doc
-Summary:	Documentation for the ROOT system
-Summary(pl.UTF-8):	Dokumentacja dla systemu ROOT
-License:	LGPL v2+ and GPL v2+ and BSD
-Group:		Documentation
-Requires:	%{name}-cint = %{version}-%{release}
-
-%description doc
-This package contains the automatically generated ROOT class
-documentation.
-
-%description doc -l pl.UTF-8
-Ten pakiet zawiera automatycznie wygenerowaną klasę dokumentacji dla
-ROOT.
 
 %package core
 Summary:	ROOT core libraries
@@ -183,6 +168,32 @@ This package contains the CINT C++ interpreter version 5.
 %description cint -l pl.UTF-8
 Ten pakiet zawiera interpreter CINT C++ w wersji 5.
 
+%package reflex
+Summary:	Reflex dictionary generator
+Summary(pl.UTF-8):	Generator słownika reflex
+Group:		Libraries
+
+%description reflex
+This package contains the reflex dictionary generator for ROOT.
+
+%description reflex -l pl.UTF-8
+Ten pakiet zawiera generator słownika reflex dla ROOT.
+
+%package doc
+Summary:	Documentation for the ROOT system
+Summary(pl.UTF-8):	Dokumentacja dla systemu ROOT
+License:	LGPL v2+ and GPL v2+ and BSD
+Group:		Documentation
+Requires:	%{name}-cint = %{version}-%{release}
+
+%description doc
+This package contains the automatically generated ROOT class
+documentation.
+
+%description doc -l pl.UTF-8
+Ten pakiet zawiera automatycznie wygenerowaną klasę dokumentacji dla
+ROOT.
+
 %package graf-asimage
 Summary:	AfterImage graphics renderer for ROOT
 Summary(pl.UTF-8):	Grafinczy renderer AfterImage dla ROOT
@@ -198,6 +209,31 @@ TIFF.
 Ten pakiet zawiera renderer AfterImage dla ROOT, który umożliwia
 użytkownikowi przechowywanie wyjściowych plików graficznych w wielu
 formatach, między innymi JPEG, PNG oraz TIFF.
+
+%package graf-gpad
+Summary:	Canvas and pad library for ROOT
+Summary(pl.UTF-8):	Biblioteka canvas i pad dla ROOT
+Group:		Libraries
+Requires:	%{name}-graf-postscript = %{version}-%{release}
+
+%description graf-gpad
+This package contains a library for canvas and pad manipulations.
+
+%description graf-gpad -l pl.UTF-8
+Ten pakiet zawiera bibliotekę canvas i pad do manipulacji.
+
+%package graf-postscript
+Summary:	Postscript/PDF renderer library for ROOT
+Summary(pl.UTF-8):	Biblioteka renderująca Postscript/PDF dla ROOT
+Group:		Libraries
+
+%description graf-postscript
+This package contains a library for ROOT, which allows rendering
+postscript and PDF output.
+
+%description graf-postscript -l pl.UTF-8
+Ten pakiet zawiera bibliotekę dla ROOT, która umożliwia renderowanie
+postscript i zapis do PDF.
 
 %package hbook
 Summary:	Hbook library for ROOT
@@ -222,17 +258,6 @@ Shell-based interface to the PROOF dataset handling.
 
 %description proof-pq2 -l pl.UTF-8
 Konsolowy interfejs do obsługi zestawów danych PROFF.
-
-%package reflex
-Summary:	Reflex dictionary generator
-Summary(pl.UTF-8):	Generator słownika reflex
-Group:		Libraries
-
-%description reflex
-This package contains the reflex dictionary generator for ROOT.
-
-%description reflex -l pl.UTF-8
-Ten pakiet zawiera generator słownika reflex dla ROOT.
 
 %prep
 %setup -q -n %{name}
@@ -308,6 +333,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun cint -p /sbin/ldconfig
 %post graf-asimage -p /sbin/ldconfig
 %postun graf-asimage -p /sbin/ldconfig
+%post graf-gpad -p /sbin/ldconfig
+%postun graf-gpad -p /sbin/ldconfig
+%post graf-postscript -p /sbin/ldconfig
+%postun graf-postscript -p /sbin/ldconfig
 %post hbook -p /sbin/ldconfig
 %postun hbook -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
@@ -332,10 +361,6 @@ rm -rf $RPM_BUILD_ROOT
 %files icons
 %defattr(644,root,root,755)
 %{_datadir}/%{name}/icons
-
-%files doc
-%defattr(644,root,root,755)
-#%%doc %{_docdir}/%{name}-%{version}/html
 
 %files core -f includelist-core
 %defattr(644,root,root,755)
@@ -376,26 +401,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/cint
 %dir %{_includedir}/%{name}
 
-%files graf-asimage -f includelist-graf2d-asimage
-%defattr(644,root,root,755)
-%{_libdir}/%{name}/libASImage.so
-%{_libdir}/%{name}/libASImageGui.so
-
-%files hbook -f includelist-hist-hbook
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/g2root
-%attr(755,root,root) %{_bindir}/h2root
-%{_mandir}/man1/g2root.1*
-%{_mandir}/man1/h2root.1*
-%{_libdir}/%{name}/libminicern.so
-%{_libdir}/%{name}/libHbook.so
-%{_libdir}/%{name}/libHbook.rootmap
-
-%files proof-pq2 -f includelist-proof-pq2
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pq2*
-%{_mandir}/man1/pq2*.1*
-
 %files reflex -f includelist-cint-reflex
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/genmap
@@ -411,3 +416,42 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/%{name}/Reflex
 %dir %{_includedir}/%{name}/Reflex/Builder
 %dir %{_includedir}/%{name}/Reflex/internal
+
+%files doc
+%defattr(644,root,root,755)
+#%%doc %{_docdir}/%{name}-%{version}/html
+
+%files graf-asimage -f includelist-graf2d-asimage
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libASImage.so
+%{_libdir}/%{name}/libASImageGui.so
+
+%files graf-gpad -f includelist-graf2d-gpad
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libGpad.so
+%{_libdir}/%{name}/libGpad.rootmap
+%{_datadir}/%{name}/plugins/TVirtualPad/P010_TPad.C
+
+%files graf-postscript -f includelist-graf2d-postscript
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/libPostscript.so
+%{_libdir}/%{name}/libPostscript.rootmap
+%{_datadir}/%{name}/plugins/TVirtualPS/P010_TPostScript.C
+%{_datadir}/%{name}/plugins/TVirtualPS/P020_TSVG.C
+%{_datadir}/%{name}/plugins/TVirtualPS/P030_TPDF.C
+%{_datadir}/%{name}/plugins/TVirtualPS/P040_TImageDump.C
+
+%files hbook -f includelist-hist-hbook
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/g2root
+%attr(755,root,root) %{_bindir}/h2root
+%{_mandir}/man1/g2root.1*
+%{_mandir}/man1/h2root.1*
+%{_libdir}/%{name}/libminicern.so
+%{_libdir}/%{name}/libHbook.so
+%{_libdir}/%{name}/libHbook.rootmap
+
+%files proof-pq2 -f includelist-proof-pq2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pq2*
+%{_mandir}/man1/pq2*.1*
