@@ -457,7 +457,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/genreflex-rootcint.1*
 %attr(755,root,root) %{_libdir}/%{name}/libReflex.so
 %attr(755,root,root) %{_libdir}/%{name}/libReflexDict.so
-%attr(755,root,root) %{_libdir}/%{name}/libReflexDict.rootmap
+%{_libdir}/%{name}/libReflexDict.rootmap
 %attr(755,root,root) %{_libdir}/%{name}/python
 %dir %{_includedir}/%{name}/Reflex
 %dir %{_includedir}/%{name}/Reflex/Builder
@@ -470,11 +470,11 @@ rm -rf $RPM_BUILD_ROOT
 %files geom -f includelist-geom
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libGeom.so
-%attr(755,root,root) %{_libdir}/%{name}/libGeom.rootmap
+%{_libdir}/%{name}/libGeom.rootmap
 %attr(755,root,root) %{_libdir}/%{name}/libGeomBuilder.so
-%attr(755,root,root) %{_libdir}/%{name}/libGeomBuilder.rootmap
+%{_libdir}/%{name}/libGeomBuilder.rootmap
 %attr(755,root,root) %{_libdir}/%{name}/libGeomPainter.so
-%attr(755,root,root) %{_libdir}/%{name}/libGeomPainter.rootmap
+%{_libdir}/%{name}/libGeomPainter.rootmap
 %{_datadir}/%{name}/plugins/TGeoManagerEditor/P010_TGeoManagerEditor.C
 %{_datadir}/%{name}/plugins/TVirtualGeoPainter/P010_TGeoPainter.C
 %{_datadir}/%{name}/RadioNuclides.txt
@@ -482,7 +482,7 @@ rm -rf $RPM_BUILD_ROOT
 %files graf -f includelist-graf2d-graf
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libGraf.so
-%attr(755,root,root) %{_libdir}/%{name}/libGraf.rootmap
+%{_libdir}/%{name}/libGraf.rootmap
 %{_datadir}/%{name}/plugins/TMinuitGraph/P010_TGraph.C
 
 %files graf-asimage -f includelist-graf2d-asimage
@@ -493,14 +493,14 @@ rm -rf $RPM_BUILD_ROOT
 %files graf-gpad -f includelist-graf2d-gpad
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libGpad.so
-%attr(755,root,root) %{_libdir}/%{name}/libGpad.rootmap
+%{_libdir}/%{name}/libGpad.rootmap
 %dir %{_datadir}/%{name}/plugins/TVirtualPad
 %{_datadir}/%{name}/plugins/TVirtualPad/P010_TPad.C
 
 %files graf-postscript -f includelist-graf2d-postscript
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libPostscript.so
-%attr(755,root,root) %{_libdir}/%{name}/libPostscript.rootmap
+%{_libdir}/%{name}/libPostscript.rootmap
 %dir %{_datadir}/%{name}/plugins/TVirtualPS
 %{_datadir}/%{name}/plugins/TVirtualPS/P010_TPostScript.C
 %{_datadir}/%{name}/plugins/TVirtualPS/P020_TSVG.C
@@ -510,7 +510,7 @@ rm -rf $RPM_BUILD_ROOT
 %files graf3d -f includelist-graf3d-g3d
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libGraf3d.so
-%attr(755,root,root) %{_libdir}/%{name}/libGraf3d.rootmap
+%{_libdir}/%{name}/libGraf3d.rootmap
 %dir %{_datadir}/%{name}/plugins/TView
 %{_datadir}/%{name}/plugins/TView/P010_TView3D.C
 
@@ -522,7 +522,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/h2root.1*
 %attr(755,root,root) %{_libdir}/%{name}/libminicern.so
 %attr(755,root,root) %{_libdir}/%{name}/libHbook.so
-%attr(755,root,root) %{_libdir}/%{name}/libHbook.rootmap
+%{_libdir}/%{name}/libHbook.rootmap
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
