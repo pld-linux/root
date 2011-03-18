@@ -73,10 +73,58 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 
 %description
-An object-oriented data analysis environment.
+The ROOT system provides a set of object oriented frameworks with all
+the functionality needed to handle and analyze large amounts of data
+in a very efficient way. Having the data defined as a set of objects,
+specialized storage methods are used to get direct access to the
+separate attributes of the selected objects, without having to touch
+the bulk of the data. Included are histogramming methods in 1, 2 and 3
+dimensions, curve fitting, function evaluation, minimization, graphics
+and visualization classes to allow the easy setup of an analysis
+system that can query and process the data interactively or in batch
+mode.
+
+Thanks to the built in CINT C++ interpreter the command language, the
+scripting, or macro, language and the programming language are all
+C++. The interpreter allows for fast prototyping of the macros since
+it removes the time consuming compile/link cycle. It also provides a
+good environment to learn C++. If more performance is needed the
+interactively developed macros can be compiled using a C++ compiler.
+
+The system has been designed in such a way that it can query its
+databases in parallel on MPP machines or on clusters of workstations
+or high-end PCs. ROOT is an open system that can be dynamically
+extended by linking external libraries. This makes ROOT a premier
+platform on which to build data acquisition, simulation and data
+analysis systems.
 
 %description -l pl.UTF-8
-Obiektowo zorientowane środowisko do analizowania danych.
+System ROOT udostępnia zestaw obiektowo zorientowanych frameworków
+wraz z całą funkcjonalnością potrzebną do obróbki i analizy dużych
+ilości danych w bardzo efektywny sposób. Posiadając dane zdefiniowane
+jako zbiór obiektów, specjalistyczne metody magazynowania są używane w
+celu otrzymania dostępu do osobnych atrybutów wybranych objektów bez
+konieczności ruszania większości danych. Załączone są również metody
+histogramiczne w 1, 2 i 3 wymiarach, dopasowania krzywej, oceny
+funkcji, minimalizacji oraz klasy do grafiki i wizualizacji, które
+umożliwiają łatwe ustawienie systemu analiz umożliwiającego
+odpytywanie i przetwarzanie danych interaktywnie lub w trybie
+wsadowym.
+
+Dzięki wbudowanemu interpretorowi CINT C++, język komend, skrypty,
+makra, język oraz język programowania są stworzone w C++. Dzięki
+ominięciu czasu niezbędnego do kompilacji/linkowania interpreter
+umożliwia szybkie prototypowanie makr. Przy okazji udostępniane jest
+dobre środowisko do nauki C++. Jeżeli potrzebna jest lepsza wydajność,
+interaktywnie stworzone makra mogą zostać zbudowane używając
+kompilatora C++.
+
+System został zaprojektowany w sposób umożliwiający równoległe
+odpytywanie jego baz danych na maszynach MPP, na klastrach stacji
+roboczych lub końcowych PC-tach. ROOT jest otwartym systemem, który
+może być dynamicznie rozszerzany poprzez linkowanie zewnętrznych
+bibliotek. To czyni ROOT-a podstawową platformą do budowy akwizycji
+danych, symulacji oraz systemów analizy danych.
 
 %package icons
 Summary:	ROOT icon collection
