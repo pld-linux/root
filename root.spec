@@ -329,9 +329,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/genreflex.1*
 %{_mandir}/man1/genreflex-rootcint.1*
 %{_libdir}/%{name}/libReflex.so
-%{_libdir}/%{name}/libReflex.rootmap
 %{_libdir}/%{name}/libReflexDict.so
-%{_libdir}/%{name}/libReflexDict.so.rootmap
+%{_libdir}/%{name}/libReflexDict.rootmap
 %{_libdir}/%{name}/python
 %dir %{_includedir}/%{name}/Reflex
 %dir %{_includedir}/%{name}/Reflex/Builder
