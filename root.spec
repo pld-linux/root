@@ -350,9 +350,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}/libCore.*
 %{_libdir}/%{name}/libNew.*
 %{_libdir}/%{name}/libRint.*
-%{_libdir}/%{name}/libRIO.*
 %{_libdir}/%{name}/libThread.*
 %{_libdir}/%{name}/lib[^R]*Dict.*
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/class.rules
+%{_datadir}/%{name}/gdb-backtrace.sh
+%{_datadir}/%{name}/root.mimes
+%{_datadir}/%{name}/system.rootauthrc
+%{_datadir}/%{name}/system.rootdaemonrc
+%{_datadir}/%{name}/system.rootrc
+%{_mandir}/man1/system.rootdaemonrc.1*
 %{_includedir}/%{name}/RConfigOptions.h
 %{_includedir}/%{name}/RConfigure.h
 %{_includedir}/%{name}/compiledata.h
@@ -364,8 +371,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/rootcint
 %{_mandir}/man1/rootcint.1*
+%dir %{_libdir}/%{name}
 %{_libdir}/%{name}/libCint.so
 %{_libdir}/%{name}/cint
+%dir %{_includedir}/%{name}
 
 %files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
