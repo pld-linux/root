@@ -154,6 +154,7 @@ formatach, między innymi JPEG, PNG oraz TIFF.
 ./configure %{config_target} \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir}/%{name} \
+	--etcdir=%{_datadir}/%{name} \
 	--docdir=%{_docdir}/%{name}-%{version} \
 	--disable-builtin-afterimage \
 	--disable-builtin-ftgl \
