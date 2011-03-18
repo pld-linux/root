@@ -139,6 +139,19 @@ Ten pakiet zawiera renderer AfterImage dla ROOT, który umożliwia
 użytkownikowi przechowywanie wyjściowych plików graficznych w wielu
 formatach, między innymi JPEG, PNG oraz TIFF.
 
+%package hbook
+Summary:	Hbook library for ROOT
+Summary(pl.UTF-8):	Biblioteka Hbook dla ROOT
+Group:		Libraries
+
+%description hbook
+This package contains the Hbook library for ROOT, allowing you to
+access legacy Hbook files (NTuples and Histograms from PAW).
+
+%description hbook -l pl.UTF-8
+Ten pakiet zawiera bibliotekę Hbook dla ROOT, umożliwiającą dostęp do
+starszych plików Hbooka (NTuples i Histograms z PAW).
+
 %prep
 %setup -q -n %{name}
 %patch0 -p1
@@ -179,7 +192,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # Remove some junk
-#%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/BUILDSYSTEM
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/drop_from_path
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/ChangeLog-2-24
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/INSTALL
 #%%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.ALIEN
@@ -210,6 +223,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun core -p /sbin/ldconfig
 %post graf-asimage -p /sbin/ldconfig
 %postun graf-asimage -p /sbin/ldconfig
+%post hbook -p /sbin/ldconfig
+%postun hbook -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -262,5 +277,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files graf-asimage -f includelist-graf2d-asimage
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/libASImage.*
-%{_libdir}/%{name}/libASImageGui.*
+%{_libdir}/%{name}/libASImage.so
+%{_libdir}/%{name}/libASImageGui.so
+
+%files hbook -f includelist-hist-hbook
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/g2root
+%attr(755,root,root) %{_bindir}/h2root
+%{_mandir}/man1/g2root.1*
+%{_mandir}/man1/h2root.1*
+%{_libdir}/%{name}/libminicern.so
+%{_libdir}/%{name}/libminicern.rootmap
+%{_libdir}/%{name}/libHbook.so
+%{_libdir}/%{name}/libHbook.rootmap
