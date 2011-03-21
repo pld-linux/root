@@ -320,18 +320,40 @@ This package contains the MathCore library for ROOT.
 %description mathcore -l pl.UTF-8
 Ten pakiet zawiera bibliotekę MathCore dla ROOT.
 
+%package matrix
+Summary:	Matrix library for ROOT
+Summary(pl.UTF-8):	Biblioteka matrix dla ROOT
+Group:		Libraries
+
+%description matrix
+This package contains the Matrix library for ROOT.
+
+%description matrix -l pl.UTF-8
+Ten pakiet zawiera bibliotekę Matrix dla ROOT.
+
 %package minuit
 Summary:	Minuit library for ROOT
 Summary(pl.UTF-8):	Biblioteka minuit dla ROOT
-Group:		Applications/Engineering
+Group:		Libraries
 
 %description minuit
 This package contains the MINUIT library for ROOT. This provides a
 fitting algorithm for ROOT.
 
-%description proof-pq2 -l pl.UTF-8
+%description minuit -l pl.UTF-8
 Ten pakiet zawiera bibliotekę MINUIT dla ROOT. Udostępnia ona algorytm
 dopasowania dla ROOT.
+
+%package net
+Summary:	Net library for ROOT
+Summary(pl.UTF-8):	Biblioteka net dla ROOT
+Group:		Libraries
+
+%description net
+This package contains the ROOT networking library.
+
+%description net -l pl.UTF-8
+Ten pakiet zawiera bibliotekę sieciową dla ROOT.
 
 %package proof-pq2
 Summary:	PROOF Quick Query (pq2)
@@ -441,8 +463,12 @@ rm -rf $RPM_BUILD_ROOT
 %postun hist-painter -p /sbin/ldconfig
 %post mathcore -p /sbin/ldconfig
 %postun mathcore -p /sbin/ldconfig
+%post matrix -p /sbin/ldconfig
+%postun matrix -p /sbin/ldconfig
 %post minuit -p /sbin/ldconfig
 %postun minuit -p /sbin/ldconfig
+%post net -p /sbin/ldconfig
+%postun net -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
 %postun reflex -p /sbin/ldconfig
 
@@ -602,6 +628,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libMathCore.rootmap
 %dir %{_includedir}/%{name}/Fit
 
+%files matrix -f includelist-math-matrix
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libMatrix.so
+%attr(755,root,root) %{_libdir}/%{name}/libMatrix.rootmap
+
 %files minuit -f includelist-math-minuit
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libMinuit.so
@@ -609,6 +640,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P020_TMinuitMinimizer.C
 %{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P060_TLinearMinimizer.C
 %{_datadir}/%{name}/plugins/TVirtualFitter/P010_TFitter.C
+
+%files net -f includelist-net-net
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libNet.so
+%attr(755,root,root) %{_libdir}/%{name}/libNet.rootmap
+%{_datadir}/%{name}/plugins/TApplication/P010_TApplicationRemote.C
+%{_datadir}/%{name}/plugins/TApplication/P020_TApplicationServer.C
+%{_datadir}/%{name}/plugins/TFile/P010_TWebFile.C
+%{_datadir}/%{name}/plugins/TSystem/P050_TWebSystem.C
+%{_datadir}/%{name}/plugins/TVirtualMonitoringWriter/P020_TSQLMonitoringWriter.C
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
