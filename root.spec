@@ -414,6 +414,7 @@ Ten pakiet zawiera bibliotekę Tree dla ROOT.
 	--disable-builtin-freetype \
 	--disable-builtin-pcre \
 	--disable-builtin-zlib \
+	--disable-rpath \
 	--disable-xrootd \
 	%{!?with_krb5:--disable-krb5} \
 	--enable-gsl-shared \
