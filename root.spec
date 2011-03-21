@@ -4,6 +4,7 @@
 #	- separate packages for tutorials/docs
 #	- xrootd is disabled because of errors - re-enable it in future
 #	- files
+#	- check and set proper groups for subpackages if needed
 #
 #Conditional build:
 %bcond_with	krb5	# build with MIT kerberos
@@ -287,7 +288,7 @@ starszych plików Hbooka (NTuples i Histograms z PAW).
 %package hist
 Summary:	Histogram library for ROOT
 Summary(pl.UTF-8):	Biblioteka histogramu dla ROOT
-Group:		Applications/Engineering
+Group:		Libraries
 Requires:	%{name}-hist-painter = %{version}-%{release}
 
 %description hist
@@ -296,10 +297,21 @@ This package contains a library for histogramming in ROOT.
 %description hist -l pl.UTF-8
 Ten pakiet zawiera bibliotekę do tworzenia histogramów w ROOT.
 
+%package hist-painter
+Summary:	Histogram painter plugin for ROOT
+Summary(pl.UTF-8):	Wtyczka rysownika histogramów dla ROOT
+Group:		Libraries
+
+%description hist-painter
+This package contains a painter of histograms for ROOT.
+
+%description hist-painter -l pl.UTF-8
+Ten pakiet zawiera rysownik histogramów dla ROOT.
+
 %package proof-pq2
 Summary:	PROOF Quick Query (pq2)
 Summary(pl.UTF-8):	Szybkie Zapytanie PROFF (PROOF Quick Query - pq2)
-Group:		Applications/Engineering
+Group:		Libraries
 
 %description proof-pq2
 Shell-based interface to the PROOF dataset handling.
@@ -399,6 +411,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun hbook -p /sbin/ldconfig
 %post hist -p /sbin/ldconfig
 %postun hist -p /sbin/ldconfig
+%post hist-painter -p /sbin/ldconfig
+%postun hist-painter -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
 %postun reflex -p /sbin/ldconfig
 
@@ -428,10 +442,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rlibmap
 %attr(755,root,root) %{_bindir}/rmkdepend
 %attr(755,root,root) %{_bindir}/root-config
-%{_mandir}/man1/memprobe.1*
-%{_mandir}/man1/rmkdepend.1*
-%{_mandir}/man1/rlibmap.1*
-%{_mandir}/man1/root-config.1*
 %attr(755,root,root) %{_libdir}/%{name}/libCore.*
 %attr(755,root,root) %{_libdir}/%{name}/libNew.*
 %attr(755,root,root) %{_libdir}/%{name}/libRint.*
@@ -444,13 +454,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/system.rootauthrc
 %{_datadir}/%{name}/system.rootdaemonrc
 %{_datadir}/%{name}/system.rootrc
-%{_mandir}/man1/system.rootdaemonrc.1*
+%dir %{_datadir}/%{name}/plugins
+%dir %{_datadir}/%{name}/plugins/*
 %{_includedir}/%{name}/RConfigOptions.h
 %{_includedir}/%{name}/RConfigure.h
 %{_includedir}/%{name}/compiledata.h
 %{_includedir}/%{name}/rmain.cxx
 %dir %{_includedir}/%{name}/Math
 %{_aclocaldir}/root.m4
+%{_mandir}/man1/memprobe.1*
+%{_mandir}/man1/rmkdepend.1*
+%{_mandir}/man1/rlibmap.1*
+%{_mandir}/man1/root-config.1*
+%{_mandir}/man1/system.rootdaemonrc.1*
 
 %files cint -f includelist-cint-cint
 %defattr(644,root,root,755)
@@ -542,6 +558,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libHist.so
 %{_libdir}/%{name}/libHist.rootmap
+
+%files hist-painter -f includelist-hist-histpainter
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libHistPainter.so
+%attr(755,root,root) %{_libdir}/%{name}/libHistPainter.rootmap
+%{_datadir}/%{name}/plugins/TVirtualHistPainter/P010_THistPainter.C
+%{_datadir}/%{name}/plugins/TVirtualGraphPainter/P010_TGraphPainter.C
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
