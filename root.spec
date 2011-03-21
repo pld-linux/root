@@ -308,6 +308,31 @@ This package contains a painter of histograms for ROOT.
 %description hist-painter -l pl.UTF-8
 Ten pakiet zawiera rysownik histogramów dla ROOT.
 
+%package mathcore
+Summary:	Core mathematics library for ROOT
+Summary(pl.UTF-8):	Główna biblioteka matematyczna dla ROOT
+Group:		Libraries
+Requires:	%{name}-minuit = %{version}-%{release}
+
+%description mathcore
+This package contains the MathCore library for ROOT.
+
+%description mathcore -l pl.UTF-8
+Ten pakiet zawiera bibliotekę MathCore dla ROOT.
+
+%package minuit
+Summary:	Minuit library for ROOT
+Summary(pl.UTF-8):	Biblioteka minuit dla ROOT
+Group:		Applications/Engineering
+
+%description minuit
+This package contains the MINUIT library for ROOT. This provides a
+fitting algorithm for ROOT.
+
+%description proof-pq2 -l pl.UTF-8
+Ten pakiet zawiera bibliotekę MINUIT dla ROOT. Udostępnia ona algorytm
+dopasowania dla ROOT.
+
 %package proof-pq2
 Summary:	PROOF Quick Query (pq2)
 Summary(pl.UTF-8):	Szybkie Zapytanie PROFF (PROOF Quick Query - pq2)
@@ -348,6 +373,7 @@ Konsolowy interfejs do obsługi zestawów danych PROFF.
 	--disable-xrootd \
 	%{!?with_krb5:--disable-krb5} \
 	--enable-gsl-shared \
+	--enable-minuit2 \
 	--enable-reflex \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
@@ -413,6 +439,10 @@ rm -rf $RPM_BUILD_ROOT
 %postun hist -p /sbin/ldconfig
 %post hist-painter -p /sbin/ldconfig
 %postun hist-painter -p /sbin/ldconfig
+%post mathcore -p /sbin/ldconfig
+%postun mathcore -p /sbin/ldconfig
+%post minuit -p /sbin/ldconfig
+%postun minuit -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
 %postun reflex -p /sbin/ldconfig
 
@@ -565,6 +595,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/libHistPainter.rootmap
 %{_datadir}/%{name}/plugins/TVirtualHistPainter/P010_THistPainter.C
 %{_datadir}/%{name}/plugins/TVirtualGraphPainter/P010_TGraphPainter.C
+
+%files mathcore -f includelist-math-mathcore
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libMathCore.so
+%attr(755,root,root) %{_libdir}/%{name}/libMathCore.rootmap
+%dir %{_includedir}/%{name}/Fit
+
+%files minuit -f includelist-math-minuit
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libMinuit.so
+%attr(755,root,root) %{_libdir}/%{name}/libMinuit.rootmap
+%{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P020_TMinuitMinimizer.C
+%{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P060_TLinearMinimizer.C
+%{_datadir}/%{name}/plugins/TVirtualFitter/P010_TFitter.C
 
 %files proof-pq2 -f includelist-proof-pq2
 %defattr(644,root,root,755)
