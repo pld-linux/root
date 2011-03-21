@@ -524,11 +524,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rlibmap
 %attr(755,root,root) %{_bindir}/rmkdepend
 %attr(755,root,root) %{_bindir}/root-config
-%attr(755,root,root) %{_libdir}/%{name}/libCore.*
-%attr(755,root,root) %{_libdir}/%{name}/libNew.*
-%attr(755,root,root) %{_libdir}/%{name}/libRint.*
-%attr(755,root,root) %{_libdir}/%{name}/libThread.*
-%attr(755,root,root) %{_libdir}/%{name}/lib[^R]*Dict.*
+%attr(755,root,root) %{_libdir}/%{name}/libCore.so
+%{_libdir}/%{name}/libCore.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libNew.so
+%attr(755,root,root) %{_libdir}/%{name}/libRint.so
+%{_libdir}/%{name}/libRint.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/libThread.so
+%{_libdir}/%{name}/libThread.rootmap
+%attr(755,root,root) %{_libdir}/%{name}/lib[^R]*Dict.so
+%{_libdir}/%{name}/lib[^R]*Dict.rootmap
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/class.rules
 %{_datadir}/%{name}/gdb-backtrace.sh
