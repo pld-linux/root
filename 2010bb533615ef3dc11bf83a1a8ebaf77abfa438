@@ -1,0 +1,3 @@
+- updated to 5.28.00b
+- remove fonts dir from tarball (NOTE)
+- add root-fontconfig.patch which forces using of system fonts (from fedora so may be bogus for pld)
