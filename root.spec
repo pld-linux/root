@@ -5,6 +5,15 @@
 #	- xrootd is disabled because of errors - re-enable it in future
 #	- files
 #	- check and set proper groups for subpackages if needed
+#	- create script for package generation
+#
+# NOTE: The upstream source is modified to exclude proprietary fonts, fix it by doing:
+#
+# wget -N ftp://root.cern.ch/root/root_v%{version}.source.tar.gz
+# tar -z -x -f root_v%{version}.source.tar.gz
+# rm -rf root/fonts
+# mv root root-%{version}
+# tar -z -c -f root-%{version}.tar.gz root-%{version}
 #
 #Conditional build:
 %bcond_with	krb5	# build with MIT kerberos
@@ -12,22 +21,24 @@
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.28.00a
+Version:	5.28.00b
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications/Engineering
-Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.gz
-# Source0-md5:	bef76dbbba63ca83575b7b6b04669631
+Source0:	%{name}-%{version}.tar.gz
+# Source0-md5:	257c0c9981698ca3e847020ab61badb3
 # Script to extract the list of include files in a subpackage
 Source1:	%{name}-includelist
 Patch0:		%{name}-docs.patch
 Patch1:		%{name}-namespaces.patch
 Patch2:		%{name}-make_version.patch
 Patch3:		%{name}-krb5_functions.patch
+Patch4:		%{name}-fontconfig.patch
 URL:		http://root.cern.ch/
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	automake
 BuildRequires:	fftw3-devel
+BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	ftgl-devel >= 2.1.3-0.rc5.1
 BuildRequires:	giflib-devel
@@ -389,13 +400,14 @@ This package contains the Tree library for ROOT.
 Ten pakiet zawiera bibliotekę Tree dla ROOT.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %if %{with krb5}
 %patch3 -p1
 %endif
+%patch4 -p1
 
 %{__sed} -i '/check_library/s@ \\$@ %{_libdir} \\@' configure
 
