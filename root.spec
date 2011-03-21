@@ -308,6 +308,17 @@ This package contains a painter of histograms for ROOT.
 %description hist-painter -l pl.UTF-8
 Ten pakiet zawiera rysownik histogramów dla ROOT.
 
+%package io
+Summary:	Input/output of ROOT objects
+Summary(pl.UTF-8):	Wejście/wyjście dla obiektów ROOT
+Group:		Libraries
+
+%description io
+This package provides I/O routines for ROOT objects.
+
+%description io -l pl.UTF-8
+Ten pakiet zawiera procedury wejścia/wyjścia dla obiektów ROOT.
+
 %package mathcore
 Summary:	Core mathematics library for ROOT
 Summary(pl.UTF-8):	Główna biblioteka matematyczna dla ROOT
@@ -365,6 +376,17 @@ Shell-based interface to the PROOF dataset handling.
 
 %description proof-pq2 -l pl.UTF-8
 Konsolowy interfejs do obsługi zestawów danych PROFF.
+
+%package tree
+Summary:	Tree library for ROOT
+Summary(pl.UTF-8):	Biblioteka tree dla ROOT
+Group:		Applications/Engineering
+
+%description tree
+This package contains the Tree library for ROOT.
+
+%description tree -l pl.UTF-8
+Ten pakiet zawiera bibliotekę Tree dla ROOT.
 
 %prep
 %setup -q -n %{name}
@@ -461,6 +483,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun hist -p /sbin/ldconfig
 %post hist-painter -p /sbin/ldconfig
 %postun hist-painter -p /sbin/ldconfig
+%post io -p /sbin/ldconfig
+%postun io -p /sbin/ldconfig
 %post mathcore -p /sbin/ldconfig
 %postun mathcore -p /sbin/ldconfig
 %post matrix -p /sbin/ldconfig
@@ -471,6 +495,8 @@ rm -rf $RPM_BUILD_ROOT
 %postun net -p /sbin/ldconfig
 %post reflex -p /sbin/ldconfig
 %postun reflex -p /sbin/ldconfig
+%post tree -p /sbin/ldconfig
+%postun tree -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -618,25 +644,32 @@ rm -rf $RPM_BUILD_ROOT
 %files hist-painter -f includelist-hist-histpainter
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libHistPainter.so
-%attr(755,root,root) %{_libdir}/%{name}/libHistPainter.rootmap
+%{_libdir}/%{name}/libHistPainter.rootmap
 %{_datadir}/%{name}/plugins/TVirtualHistPainter/P010_THistPainter.C
 %{_datadir}/%{name}/plugins/TVirtualGraphPainter/P010_TGraphPainter.C
+
+%files io -f includelist-io-io
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libRIO.so
+%{_libdir}/%{name}/libRIO.rootmap
+%{_datadir}/%{name}/plugins/TArchiveFile/P010_TZIPFile.C
+%{_datadir}/%{name}/plugins/TVirtualStreamerInfo/P010_TStreamerInfo.C
 
 %files mathcore -f includelist-math-mathcore
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libMathCore.so
-%attr(755,root,root) %{_libdir}/%{name}/libMathCore.rootmap
+%{_libdir}/%{name}/libMathCore.rootmap
 %dir %{_includedir}/%{name}/Fit
 
 %files matrix -f includelist-math-matrix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libMatrix.so
-%attr(755,root,root) %{_libdir}/%{name}/libMatrix.rootmap
+%{_libdir}/%{name}/libMatrix.rootmap
 
 %files minuit -f includelist-math-minuit
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libMinuit.so
-%attr(755,root,root) %{_libdir}/%{name}/libMinuit.rootmap
+%{_libdir}/%{name}/libMinuit.rootmap
 %{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P020_TMinuitMinimizer.C
 %{_datadir}/%{name}/plugins/ROOT@@Math@@Minimizer/P060_TLinearMinimizer.C
 %{_datadir}/%{name}/plugins/TVirtualFitter/P010_TFitter.C
@@ -644,7 +677,7 @@ rm -rf $RPM_BUILD_ROOT
 %files net -f includelist-net-net
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/libNet.so
-%attr(755,root,root) %{_libdir}/%{name}/libNet.rootmap
+%{_libdir}/%{name}/libNet.rootmap
 %{_datadir}/%{name}/plugins/TApplication/P010_TApplicationRemote.C
 %{_datadir}/%{name}/plugins/TApplication/P020_TApplicationServer.C
 %{_datadir}/%{name}/plugins/TFile/P010_TWebFile.C
@@ -655,3 +688,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pq2*
 %{_mandir}/man1/pq2*.1*
+
+%files tree -f includelist-tree-tree
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/libTree.so
+%{_libdir}/%{name}/libTree.rootmap
