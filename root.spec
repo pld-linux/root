@@ -21,12 +21,12 @@
 Summary:	An object-oriented data analysis environment
 Summary(pl.UTF-8):	Obiektowo zorientowane środowisko do analizowania danych
 Name:		root
-Version:	5.28.00b
+Version:	5.28.00c
 Release:	0.1
 License:	LGPL v2.1+
 Group:		Applications/Engineering
 Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	257c0c9981698ca3e847020ab61badb3
+# Source0-md5:	1fb410a231fd95d1325e6f4199ba71e5
 # Script to extract the list of include files in a subpackage
 Source1:	%{name}-includelist
 Patch0:		%{name}-docs.patch
