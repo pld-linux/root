@@ -429,9 +429,11 @@ Ten pakiet zawiera bibliotekę Tree dla ROOT.
 	--disable-rpath \
 	--disable-xrootd \
 	%{!?with_krb5:--disable-krb5} \
+	--enable-explicitlink \
 	--enable-gsl-shared \
 	--enable-minuit2 \
 	--enable-reflex \
+	--enable-soversion \
 	--with-cc="%{__cc} %{rpmcflags}" \
 	--with-cxx="%{__cxx} %{rpmcxxflags}" \
 	--with-x11-libdir=%{_libdir} \
